@@ -6,7 +6,7 @@ export class UserObjectMother {
   }
 
   static withInvalidIdLength() {
-    const smallId = '1234567';
+    const smallId = 'A23&4E=';
     return UserDataBuilder.aUser().withInvalidId(smallId).build();
   }
 }
