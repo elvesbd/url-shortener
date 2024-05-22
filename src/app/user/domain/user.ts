@@ -24,9 +24,6 @@ export class User extends Entity<UserProps> {
 
   static create(props: UserProps) {
     const user = new User(props);
-    if (user.hasNotifications) {
-      return null;
-    }
     return user;
   }
 
@@ -48,6 +45,10 @@ export class User extends Entity<UserProps> {
 
   get password(): Password {
     return this._password;
+  }
+
+  public setPasswordWithHash(hash: string) {
+    this._password = new Password(hash);
   }
 
   toString(): string {
