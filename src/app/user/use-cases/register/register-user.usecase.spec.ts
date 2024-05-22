@@ -1,32 +1,31 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { RegisterUserUseCase } from './register-user.usecase';
-import { HasherPassword } from '@app/user/ports/hash/hash.password';
 import { UserRepository } from '@app/user/ports/repository/user.repository';
-import { UserDataBuilder } from '@app/user/test/data-builder/user-data-builder';
 import { User } from '@app/user/domain/user';
+import { UserFoundException } from '@app/user/exceptions/user-found.exception';
+import { RegisterUserOutput } from './types/register-user.output';
+import { UserObjectMother } from '@app/user/test/data-builder/user-object.mother';
+import { HashPassword } from '@app/user/ports/cryptography/encrypt.password';
 
 describe('RegisterUserUseCase', () => {
   let sut: RegisterUserUseCase;
-  let hasher: HasherPassword;
+  let cryptography: HashPassword;
   let userRepository: UserRepository;
-
-  const userProps = UserDataBuilder.aUser().build();
-  const user = User.create(userProps);
 
   beforeEach(async () => {
     jest.clearAllMocks();
 
-    const HasherPasswordProvider = {
-      provide: HasherPassword,
+    const HashPasswordProvider = {
+      provide: HashPassword,
       useValue: {
-        hashPassword: jest.fn().mockResolvedValue('hashPassword'),
+        encrypt: jest.fn().mockResolvedValue('hashedPassword'),
       },
     };
 
     const UserRepositoryProvider = {
       provide: UserRepository,
       useValue: {
-        findByEmail: jest.fn().mockResolvedValue(user),
+        findByEmail: jest.fn().mockResolvedValue(null),
         register: jest.fn().mockResolvedValue(0),
       },
     };
@@ -34,19 +33,72 @@ describe('RegisterUserUseCase', () => {
     const app: TestingModule = await Test.createTestingModule({
       providers: [
         RegisterUserUseCase,
-        HasherPasswordProvider,
+        HashPasswordProvider,
         UserRepositoryProvider,
       ],
     }).compile();
 
     sut = app.get<RegisterUserUseCase>(RegisterUserUseCase);
-    hasher = app.get<HasherPassword>(HasherPassword);
+    cryptography = app.get<HashPassword>(HashPassword);
     userRepository = app.get<UserRepository>(UserRepository);
   });
 
   it('should be defined', () => {
     expect(sut).toBeDefined();
-    expect(hasher).toBeDefined();
+    expect(cryptography).toBeDefined();
     expect(userRepository).toBeDefined();
+  });
+
+  describe('execute', () => {
+    const input = UserObjectMother.user();
+
+    it('should call find by email with correct values', async () => {
+      await sut.execute(input);
+
+      expect(userRepository.findByEmail).toHaveBeenCalledTimes(1);
+      expect(userRepository.findByEmail).toHaveBeenCalledWith(input.email);
+    });
+
+    it('should throw UserFoundException if user already exists', async () => {
+      const user = User.create(input);
+
+      jest.spyOn(userRepository, 'findByEmail').mockResolvedValueOnce(user);
+
+      await expect(sut.execute(input)).rejects.toThrow(UserFoundException);
+    });
+
+    it('should generate notifications for invalid user ID length', async () => {
+      const input = UserObjectMother.withInvalidIdLength();
+      const user = User.create(input);
+      const expectedResult: RegisterUserOutput = {
+        data: null,
+        notifications: [
+          'Password must be at least 8 characters long',
+          'Password must contain at least one letter',
+          'Password must contain at least one special character',
+        ],
+      };
+
+      const result = await sut.execute(input);
+
+      expect(user.hasNotifications).toBeTruthy();
+      expect(result).toStrictEqual(expectedResult);
+    });
+
+    it('should call hash password with correct values', async () => {
+      await sut.execute(input);
+
+      expect(cryptography.hash).toHaveBeenCalledTimes(1);
+      expect(cryptography.hash).toHaveBeenCalledWith(input.password);
+    });
+
+    it('should be register an use with success', async () => {
+      const result = await sut.execute(input);
+
+      expect(userRepository.register).toHaveBeenCalled();
+      expect(userRepository.register).toHaveBeenCalledTimes(1);
+      expect(result.data).toBeDefined();
+      expect(result.notifications).toHaveLength(0);
+    });
   });
 });
