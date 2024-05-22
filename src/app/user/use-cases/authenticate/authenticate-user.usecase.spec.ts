@@ -1,11 +1,11 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { UserRepository } from '@app/user/ports/repository/user.repository';
 import { User } from '@app/user/domain/user';
-import { UserObjectMother } from '@app/user/test/data-builder/user-object.mother';
 import { ComparePassword } from '@app/user/ports/cryptography/compare.password';
 import { SignToken } from '@app/user/ports/token/sign-token';
 import { AuthenticateUserUseCase } from './authenticate-user.usecase';
 import { UnauthorizedException } from '@nestjs/common';
+import { UserObjectMother } from '@app/user/__mocks__/data-builder/user-object.mother';
 
 describe('AuthenticateUserUseCase', () => {
   let sut: AuthenticateUserUseCase;

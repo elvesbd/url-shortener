@@ -4,13 +4,15 @@ import { UserRepository } from '@app/user/ports/repository/user.repository';
 import { User } from '@app/user/domain/user';
 import { UserFoundException } from '@app/user/exceptions/user-found.exception';
 import { RegisterUserOutput } from './types/register-user.output';
-import { UserObjectMother } from '@app/user/test/data-builder/user-object.mother';
 import { HashPassword } from '@app/user/ports/cryptography/encrypt.password';
+import { UserObjectMother } from '@app/user/__mocks__/data-builder/user-object.mother';
 
 describe('RegisterUserUseCase', () => {
   let sut: RegisterUserUseCase;
   let cryptography: HashPassword;
   let userRepository: UserRepository;
+
+  const input = UserObjectMother.user();
 
   beforeEach(async () => {
     jest.clearAllMocks();
@@ -18,7 +20,11 @@ describe('RegisterUserUseCase', () => {
     const HashPasswordProvider = {
       provide: HashPassword,
       useValue: {
-        encrypt: jest.fn().mockResolvedValue('hashedPassword'),
+        hash: jest
+          .fn()
+          .mockResolvedValue(
+            '$2a$12$nsE/R/UozqXEQjn22pRTr.KZCwacqvGiN91Rh/o/SNmSzYc12ZowG',
+          ),
       },
     };
 
@@ -50,8 +56,6 @@ describe('RegisterUserUseCase', () => {
   });
 
   describe('execute', () => {
-    const input = UserObjectMother.user();
-
     it('should call find by email with correct values', async () => {
       await sut.execute(input);
 
