@@ -10,8 +10,8 @@ export class User extends Entity<UserProps> {
   private _email: Email;
   private _password: Password;
   private _notification: Notification;
-  private _updatedAt?: Date;
-  private _deletedAt?: Date;
+  public readonly updatedAt?: Date;
+  public readonly deletedAt?: Date;
 
   constructor(props: UserProps) {
     super(props);
@@ -22,7 +22,7 @@ export class User extends Entity<UserProps> {
     this._password = new Password(props.password, this._notification);
   }
 
-  static create(props: UserProps) {
+  static create(props: UserProps): User {
     const user = new User(props);
     return user;
   }
@@ -48,7 +48,7 @@ export class User extends Entity<UserProps> {
   }
 
   public setPasswordWithHash(hash: string) {
-    this._password = new Password(hash);
+    this._password = new Password(hash, this._notification);
   }
 
   toString(): string {

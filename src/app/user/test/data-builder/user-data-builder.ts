@@ -4,7 +4,7 @@ export class UserDataBuilder {
   private props: UserProps = {
     name: 'Yasmin Manuela Farias Lima',
     email: 'yasminmanuelafarias@capgemini.com',
-    password: '@654#67=',
+    password: '@654#67=e',
   };
 
   public static aUser(): UserDataBuilder {
