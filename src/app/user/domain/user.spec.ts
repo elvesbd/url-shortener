@@ -54,13 +54,6 @@ describe('User', () => {
     expect(user.password.value).toBe(validProps.password);
   });
 
-  it('should return string representation of user', () => {
-    const user = User.create(validProps);
-    const expectedString = `User(name: ${user.name.value}, email: ${user.email.value})`;
-
-    expect(user.toString()).toBe(expectedString);
-  });
-
   it('should create a user on success', () => {
     const user = User.create(validProps);
 

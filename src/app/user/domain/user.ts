@@ -50,8 +50,4 @@ export class User extends Entity<UserProps> {
   public setPasswordWithHash(hash: string) {
     this._password = new Password(hash, this._notification);
   }
-
-  toString(): string {
-    return `User(name: ${this._name.value}, email: ${this._email.value})`;
-  }
 }
