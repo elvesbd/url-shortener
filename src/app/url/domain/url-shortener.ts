@@ -1,19 +1,19 @@
 import { Entity } from '@app/shared/entity/entity';
 import { Url } from '@app/shared/value-objects/url';
 import { Notification } from '@app/shared/notification/notification';
-import { UrlProps } from './types/url-props';
+import { UrlShortenerProps } from './types/url-shortener-props';
 
-export class UrlShortener extends Entity<UrlProps> {
+export class UrlShortener extends Entity<UrlShortenerProps> {
   private _userId?: string;
   private _originalUrl: Url;
-  private _shortUrl: string;
-  private _accessCount: number;
+  private _shortUrl?: string;
+  private _accessCount?: number;
   private _deletedAt?: Date | null;
   public readonly updatedAt?: Date;
   public readonly notification: Notification;
   private readonly baseDomain: string = 'http://localhost';
 
-  constructor(props: UrlProps) {
+  constructor(props: UrlShortenerProps) {
     super(props);
     this.notification = new Notification();
 
@@ -25,7 +25,7 @@ export class UrlShortener extends Entity<UrlProps> {
     this._originalUrl = new Url(props.originalUrl, this.notification);
   }
 
-  static create(props: UrlProps): UrlShortener {
+  static create(props: UrlShortenerProps): UrlShortener {
     return new UrlShortener(props);
   }
 
@@ -34,7 +34,7 @@ export class UrlShortener extends Entity<UrlProps> {
   }
 
   get shortUrl(): string {
-    return `${this.baseDomain}/${this._shortUrl}`;
+    return this._shortUrl;
   }
 
   get userId(): string | undefined {
@@ -78,6 +78,6 @@ export class UrlShortener extends Entity<UrlProps> {
         Math.floor(Math.random() * characters.length),
       );
     }
-    return shortUrl;
+    return `${this.baseDomain}/${shortUrl}`;
   }
 }

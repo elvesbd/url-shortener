@@ -1,4 +1,4 @@
-export type UrlProps = {
+export type UrlShortenerProps = {
   userId?: string;
   shortUrl?: string;
   originalUrl: string;
