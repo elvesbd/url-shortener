@@ -11,6 +11,11 @@ export class UserDataBuilder {
     return new UserDataBuilder();
   }
 
+  public withInvalidId(id: string): this {
+    this.props.password = id;
+    return this;
+  }
+
   public build(): UserProps {
     return this.props;
   }
