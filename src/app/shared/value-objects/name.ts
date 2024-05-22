@@ -9,6 +9,10 @@ export class Name {
   }
 
   private validate(notification: Notification) {
+    if (!this._value || this._value.trim().length === 0) {
+      notification.addNotification('Name should not be empty');
+    }
+
     const specialCharRegex = /[^a-zA-Z\s]/;
     if (specialCharRegex.test(this._value)) {
       notification.addNotification(

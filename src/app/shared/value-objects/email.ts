@@ -9,6 +9,14 @@ export class Email {
   }
 
   private validate(notification: Notification): void {
+    if (!this._value) {
+      notification.addNotification('Email should not be empty');
+    }
+
+    if (this._value.length > 320) {
+      notification.addNotification('Email should not exceed 320 characters');
+    }
+
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(this._value)) {
       notification.addNotification('Invalid email format');
