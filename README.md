@@ -49,19 +49,30 @@ As seguintes variáveis de ambiente devem ser configuradas:
 - `GET /urls/user`: Lista URLs encurtadas pelo usuário autenticado
 - `PUT /urls/:shortUrl`: Atualiza a URL de destino de uma URL encurtada
 - `DELETE /urls/:shortUrl`: Deleta uma URL encurtada
-
-### Redirecionamento
-
 - `GET /urls/:shortUrl`: Redireciona o usuário para a URL original e contabiliza o acesso
+
+### Usuários
+
+- `POST /users/authenticate`: Autentica um usuário com e-mail e senha
+- `POST /users/register`: Registra um novo usuário
 
 ## Como Rodar o Projeto
 
+### Rodando Localmente
+
 1. Clone o repositório
 2. Instale as dependências com `npm install`
-3. Configure as variáveis de ambiente
-4. Inicie o banco de dados PostgreSQL com Docker-compose: `docker-compose up -d`
-5. Execute as migrações do banco de dados: `npm run typeorm:migration:run`
+3. Configure as variáveis de ambiente (consulte o arquivo `.env.example` para as variáveis necessárias)
+4. Inicie o banco de dados PostgreSQL localmente ou use Docker Compose (consulte a próxima seção)
+5. Execute as migrações do banco de dados com `npm run typeorm:migration:run`
 6. Inicie o servidor com `npm run start:dev`
+
+### Usando Docker Compose
+
+1. Clone o repositório
+2. Certifique-se de ter o Docker e o Docker Compose instalados em seu sistema
+3. Execute `docker-compose up -d` para iniciar o banco de dados PostgreSQL e a aplicação
+4. Acesse a aplicação em `http://localhost:3000`
 
 ## Testes
 
