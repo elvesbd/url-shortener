@@ -68,7 +68,7 @@ As seguintes variáveis de ambiente devem ser configuradas:
    - [Docker Compose](https://docs.docker.com/compose/)
 
 3. Execute `docker-compose up -d` para iniciar o banco de dados PostgreSQL e a aplicação
-4. Acesse a aplicação em `http://localhost:3000`
+4. Acesse a aplicação em `http://localhost:3000/health`
 
 ## Testes
 
