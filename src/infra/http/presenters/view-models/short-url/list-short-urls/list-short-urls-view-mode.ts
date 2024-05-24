@@ -16,7 +16,7 @@ export class ListShortUrlsViewModel implements BaseViewModel {
     const baseUrl = configService.get<string>('BASE_URL');
 
     return models.map((model) => ({
-      shortUrl: `${baseUrl}${model.shortUrl}`,
+      shortUrl: `${baseUrl}/${model.shortUrl}`,
       clicks: model.clicks,
       updatedAt: model.updatedAt,
     }));
