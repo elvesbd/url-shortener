@@ -38,8 +38,6 @@ export class RedirectToOriginalUrlController {
   public async redirectToOriginalUrl(
     @Param('shortUrl') shortUrl: string,
   ): Promise<{ url: string }> {
-    console.log('nwJvha', shortUrl);
-
     const originalUrl =
       await this.redirectToOriginalUrlUseCase.execute(shortUrl);
 
