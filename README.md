@@ -27,10 +27,6 @@ O objetivo deste sistema é fornecer um serviço de encurtamento de URLs. Os usu
 
 ## Endpoints
 
-### Autenticação
-
-- `POST /auth/login`: Realiza login e retorna um Bearer Token
-
 ### URLs Encurtadas
 
 - `POST /urls/shorten`: Encurta uma URL
@@ -41,21 +37,36 @@ O objetivo deste sistema é fornecer um serviço de encurtamento de URLs. Os usu
 
 ### Usuários
 
-- `POST /users/authenticate`: Autentica um usuário com e-mail e senha
+- `POST /users/authenticate`: Autentica um usuário com e retorna um Bearer Token
 - `POST /users/register`: Registra um novo usuário
 
 ## Como Rodar o Projeto
 
-1. Clone o repositório.
-2. Certifique-se de ter todas as dependências instaladas:
+1. Clone o repositório:
 
-   - [Node.js](https://nodejs.org/)
-   - [PostgreSQL](https://www.postgresql.org/)
-   - [Docker](https://docs.docker.com/)
-   - [Docker Compose](https://docs.docker.com/compose/)
+   ```sh
+   git clone https://github.com/elvesbd/url-shortener.git
+   ```
 
-3. Execute `docker-compose up -d` para iniciar o banco de dados PostgreSQL e a aplicação
-4. Acesse a aplicação em `http://localhost:3000/health`
+2. Navegue até o diretório do projeto:
+
+   ```sh
+   cd url-shortener
+   ```
+
+3. **Usando npm:**
+   Certifique-se de ter o Node.js e o npm instalados. Você pode baixá-los e instalá-los em [Node.js Downloads](https://nodejs.org/en/download/).
+
+   - Instale as dependências:
+     ```sh
+     npm install
+     ```
+   - Execute `docker-compose up -d` para iniciar o banco de dados PostgreSQL e a aplicação:
+     ```sh
+     docker-compose up -d
+     ```
+
+4. Acesse a aplicação em `http://localhost:3000/health`.
 
 ## Testes
 
