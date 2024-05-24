@@ -1,11 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { RegisterUserUseCase } from './register-user.usecase';
-import { UserRepository } from '@app/user/ports/repository/user.repository';
-import { User } from '@app/user/domain/user';
-import { UserFoundException } from '@app/user/exceptions/user-found.exception';
-import { RegisterUserOutput } from './types/register-user.output';
-import { HashPassword } from '@app/user/ports/cryptography/encrypt.password';
-import { UserObjectMother } from '@app/user/__mocks__/data-builder/user-object.mother';
+import { User } from '@app/user/domain';
+import { RegisterUserUseCase } from '@app/user/use-cases';
+import { UserFoundException } from '@app/user/exceptions';
+import { HashPassword, UserRepository } from '@app/user/ports';
+import { UserObjectMother } from '@app/user/__mocks__/data-builder';
 
 describe('RegisterUserUseCase', () => {
   let sut: RegisterUserUseCase;

@@ -1,8 +1,8 @@
+import Id from '@app/shared/value-objects/id';
 import { Entity } from '@app/shared/entity/entity';
 import { Url } from '@app/shared/value-objects/url';
-import { Notification } from '@app/shared/notification/notification';
-import Id from '@app/shared/value-objects/id';
-import { ShortUrlProps } from './types/short-url-props';
+import { ShortUrlProps } from '@app/short-url/domain';
+import { Notification } from '@app/shared/notification';
 
 export class ShortUrl extends Entity<ShortUrlProps> {
   private _userId?: string;

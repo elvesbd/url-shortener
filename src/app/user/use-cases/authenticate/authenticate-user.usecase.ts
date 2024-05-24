@@ -1,9 +1,7 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { UseCase } from '@app/shared/interfaces/UseCase';
-import { SignToken } from '@app/user/ports/token/sign-token';
-import { UserRepository } from '@app/user/ports/repository/user.repository';
-import { ComparePassword } from '@app/user/ports/cryptography/compare.password';
 import { AuthenticateUserInput, AuthenticateUserOutput } from './types';
+import { ComparePassword, UserRepository, SignToken } from '@app/user/ports';
 
 @Injectable()
 export class AuthenticateUserUseCase

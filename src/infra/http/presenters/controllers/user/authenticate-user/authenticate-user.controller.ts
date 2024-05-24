@@ -7,9 +7,9 @@ import {
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import { AuthenticateUserDto, AuthenticateUserResponseDto } from '../dtos';
-import { AuthenticateUserUseCase } from '@app/user/use-cases/authenticate';
-import { ApiTag } from '../../short-url/constants';
 import { ApiPath } from '../constants';
+import { ApiTag } from '../../short-url/constants';
+import { AuthenticateUserUseCase } from '@app/user/use-cases';
 
 @ApiTags(ApiTag)
 @Controller(ApiPath)

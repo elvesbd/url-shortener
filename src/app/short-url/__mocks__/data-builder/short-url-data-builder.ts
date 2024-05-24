@@ -1,4 +1,4 @@
-import { ShortUrlProps } from '@app/short-url/domain/types/short-url-props';
+import { ShortUrlProps } from '@app/short-url/domain';
 
 export class ShortUrlDataBuilder {
   private props: ShortUrlProps = {

@@ -1,5 +1,5 @@
-import { UserObjectMother } from '../__mocks__/data-builder/user-object.mother';
-import { User } from './user';
+import { User } from '@app/user/domain';
+import { UserObjectMother } from '../__mocks__/data-builder';
 
 describe('User', () => {
   jest.clearAllMocks();

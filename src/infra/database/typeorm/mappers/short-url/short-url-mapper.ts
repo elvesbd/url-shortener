@@ -1,4 +1,4 @@
-import { ShortUrl } from '@app/short-url/domain/short-url';
+import { ShortUrl } from '@app/short-url/domain';
 import { TypeORMShortUrlEntity } from '../../entities/short-url.entity';
 
 export class TypeORMShortUrlMapper {

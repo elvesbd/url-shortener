@@ -1,8 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { ShortUrl } from '@app/short-url/domain';
 import { UseCase } from '@app/shared/interfaces/UseCase';
-import { ShortUrl } from '@app/short-url/domain/short-url';
-import { ShortUrlRepository } from '@app/short-url/ports/repository/short-url.repository';
-import { ShortUrlDeletedException } from '@app/short-url/exceptions/short-url-deleted.exception';
+import { ShortUrlRepository } from '@app/short-url/ports';
+import { ShortUrlDeletedException } from '@app/short-url/exceptions';
 
 @Injectable()
 export class RedirectToOriginalUrlUseCase implements UseCase<string, string> {

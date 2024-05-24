@@ -1,5 +1,5 @@
-import { Notification } from '@app/shared/notification/notification';
 import { Email } from '@app/shared/value-objects/email';
+import { Notification } from '@app/shared/notification';
 
 describe('Email Value Object', () => {
   let notification: Notification;

@@ -1,4 +1,4 @@
-import { Notification } from '@app/shared/notification/notification';
+import { Notification } from '@app/shared/notification';
 
 describe('Notification', () => {
   let notification: Notification;

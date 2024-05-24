@@ -1,5 +1,4 @@
-export {
-  AuthenticateUserDto,
-  AuthenticateUserResponseDto,
-} from './authenticate-user';
-export { RegisterUserDto, RegisterUserResponseDto } from './register-user';
+export * from './authenticate-user/authenticate-user.dto';
+export * from './authenticate-user/authenticate-user-response.dto';
+export * from './register-user/register-user.dto';
+export * from './register-user/register-user-response.dto';

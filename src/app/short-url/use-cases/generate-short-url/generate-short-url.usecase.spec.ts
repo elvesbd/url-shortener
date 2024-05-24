@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { GenerateShortUrlUseCase } from './generate-short-url.usecase';
-import { ShortUrlRepository } from '@app/short-url/ports/repository/short-url.repository';
-import { ShortUrlObjectMother } from '@app/short-url/__mocks__/data-builder/short-url-object.mother';
+import { ShortUrlRepository } from '@app/short-url/ports';
+import { GenerateShortUrlUseCase } from '@app/short-url/use-cases';
+import { ShortUrlObjectMother } from '@app/short-url/__mocks__/data-builder';
 
 describe('GenerateShortUrlUseCase', () => {
   let sut: GenerateShortUrlUseCase;

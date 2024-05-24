@@ -12,8 +12,8 @@ import {
   ApiParam,
   ApiTags,
 } from '@nestjs/swagger';
-import { RedirectToOriginalUrlUseCase } from '@app/short-url/use-cases/redirect-origin-url';
 import { ApiTag } from '../constants';
+import { RedirectToOriginalUrlUseCase } from '@app/short-url/use-cases';
 
 @ApiTags(ApiTag)
 @Controller()

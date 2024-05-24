@@ -1,4 +1,4 @@
-import { Notification } from '../notification/notification';
+import { Notification } from '@app/shared/notification';
 
 export class Password {
   private _value: string;

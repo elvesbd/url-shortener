@@ -1,10 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { User } from '@app/user/domain/user';
+import { RegisterUserInput } from './types';
 import { UseCase } from '@app/shared/interfaces/UseCase';
-import { RegisterUserInput } from './types/register-user.input';
-import { UserFoundException } from '@app/user/exceptions/user-found.exception';
-import { UserRepository } from '@app/user/ports/repository/user.repository';
-import { HashPassword } from '@app/user/ports/cryptography/encrypt.password';
+import { UserFoundException } from '@app/user/exceptions';
+import { HashPassword, UserRepository } from '@app/user/ports';
 
 type RegisterUserOutput = {
   user: User;

@@ -1,5 +1,5 @@
-import { Notification } from '@app/shared/notification/notification';
 import { Name } from '@app/shared/value-objects/name';
+import { Notification } from '@app/shared/notification';
 
 describe('Name Value Object', () => {
   let notification: Notification;

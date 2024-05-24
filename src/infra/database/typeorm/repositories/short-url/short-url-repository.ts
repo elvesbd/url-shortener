@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { dataSource } from '../../datasource';
-import { ShortUrl } from '@app/short-url/domain/short-url';
+import { ShortUrl } from '@app/short-url/domain';
+import { ShortUrlRepository } from '@app/short-url/ports';
 import { TypeORMShortUrlEntity } from '../../entities/short-url.entity';
 import { TypeORMShortUrlMapper } from '../../mappers/short-url/short-url-mapper';
-import { ShortUrlRepository } from '@app/short-url/ports/repository/short-url.repository';
 
 @Injectable()
 export class TypeORMShortUrlRepository implements ShortUrlRepository {

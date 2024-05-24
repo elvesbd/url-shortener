@@ -1,4 +1,4 @@
-import { User } from '@app/user/domain/user';
+import { User } from '@app/user/domain';
 import { TypeORMUserEntity } from '../../entities/user.entity';
 
 export class TypeORMUserMapper {

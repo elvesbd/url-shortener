@@ -1,11 +1,11 @@
 import { NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
-import { ShortUrl } from '@app/short-url/domain/short-url';
-import { UpdateDestinationUrlUseCase } from './update-destination-url.usecase';
-import { UpdateDestinationUrlInput } from './types/update-destination-url.input';
-import { ShortUrlRepository } from '@app/short-url/ports/repository/short-url.repository';
-import { ShortUrlObjectMother } from '@app/short-url/__mocks__/data-builder/short-url-object.mother';
-import { ShortUrlDeletedException } from '@app/short-url/exceptions/short-url-deleted.exception';
+import { ShortUrl } from '@app/short-url/domain';
+import { UpdateDestinationUrlInput } from './types';
+import { ShortUrlRepository } from '@app/short-url/ports';
+import { ShortUrlDeletedException } from '@app/short-url/exceptions';
+import { UpdateDestinationUrlUseCase } from '@app/short-url/use-cases';
+import { ShortUrlObjectMother } from '@app/short-url/__mocks__/data-builder';
 
 describe('UpdateDestinationUrlUseCase', () => {
   let sut: UpdateDestinationUrlUseCase;

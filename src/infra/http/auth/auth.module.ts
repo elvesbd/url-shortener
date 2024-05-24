@@ -1,12 +1,11 @@
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
-import { ComparePassword } from '@app/user/ports/cryptography/compare.password';
-import { SignToken } from '@app/user/ports/token/sign-token';
+import { PassportModule } from '@nestjs/passport';
 import { JWTService } from './jwt-service/jwt.service';
 import { BcryptService } from './bcrypt/bcrypt.service';
-import { PassportModule } from '@nestjs/passport';
 import { JwtStrategy } from './strategies/jwt/jwt.strategy';
+import { ComparePassword, SignToken } from '@app/user/ports';
 import { JwtKeyService } from './decorators/current-user.decorator';
 
 @Module({

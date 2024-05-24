@@ -1,4 +1,4 @@
-import { Notification } from '@app/shared/notification/notification';
+import { Notification } from '@app/shared/notification';
 
 export class Url {
   private _value: string;

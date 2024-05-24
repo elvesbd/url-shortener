@@ -13,10 +13,10 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { ApiPath, ApiTag } from '../constants';
+import { RemoveShortUrlUseCase } from '@app/short-url/use-cases';
+import { CurrentUserDto } from '@infra/http/auth/decorators/dto';
 import { JwtAuthGuard } from '@infra/http/auth/strategies/jwt/jwt-auth.guard';
 import { CurrentUser } from '@infra/http/auth/decorators/current-user.decorator';
-import { RemoveShortUrlUseCase } from '@app/short-url/use-cases/remove-short-url';
-import { CurrentUserDto } from '@infra/http/auth/decorators/dto';
 
 @ApiTags(ApiTag)
 @ApiBearerAuth()

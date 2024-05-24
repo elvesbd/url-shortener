@@ -8,8 +8,8 @@ import {
   ApiTags,
   ApiUnprocessableEntityResponse,
 } from '@nestjs/swagger';
+import { GenerateShortUrlUseCase } from '@app/short-url/use-cases';
 import { CurrentUser } from '@infra/http/auth/decorators/current-user.decorator';
-import { GenerateShortUrlUseCase } from '@app/short-url/use-cases/generate-short-url';
 import {
   GenerateShortUrlDto,
   GenerateShortUrlResponseDto,

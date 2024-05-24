@@ -8,9 +8,9 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { ApiPath, ApiTag } from '../constants';
+import { ListShortUrlsUseCase } from '@app/short-url/use-cases';
 import { ListShortUrlsResponseDto } from '../dtos/list-short-urls';
 import { JwtAuthGuard } from '@infra/http/auth/strategies/jwt/jwt-auth.guard';
-import { ListShortUrlsUseCase } from '@app/short-url/use-cases/list-short-urls';
 import { CurrentUser } from '@infra/http/auth/decorators/current-user.decorator';
 import { ListShortUrlsViewModel } from '@infra/http/presenters/view-models/short-url';
 import { CurrentUserDto } from '@infra/http/auth/decorators/dto';

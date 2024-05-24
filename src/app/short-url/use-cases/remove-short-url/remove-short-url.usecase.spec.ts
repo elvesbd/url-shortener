@@ -1,11 +1,11 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { ShortUrlRepository } from '@app/short-url/ports/repository/short-url.repository';
-import { ShortUrlObjectMother } from '@app/short-url/__mocks__/data-builder/short-url-object.mother';
-import { RemoveShortUrlUseCase } from './remove-short-url.usecase';
-import { ShortUrlDeletedException } from '@app/short-url/exceptions/short-url-deleted.exception';
 import { NotFoundException, UnauthorizedException } from '@nestjs/common';
-import { ShortUrl } from '@app/short-url/domain/short-url';
-import { RemoveShortUrlInput } from './types/remove-short-url.input';
+import { Test, TestingModule } from '@nestjs/testing';
+import { RemoveShortUrlInput } from './types';
+import { ShortUrl } from '@app/short-url/domain';
+import { ShortUrlRepository } from '@app/short-url/ports';
+import { RemoveShortUrlUseCase } from './remove-short-url.usecase';
+import { ShortUrlDeletedException } from '@app/short-url/exceptions';
+import { ShortUrlObjectMother } from '@app/short-url/__mocks__/data-builder';
 
 describe('RemoveShortUrlUseCase', () => {
   let sut: RemoveShortUrlUseCase;

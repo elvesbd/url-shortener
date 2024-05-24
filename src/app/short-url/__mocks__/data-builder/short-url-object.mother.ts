@@ -1,4 +1,4 @@
-import { ShortUrlDataBuilder } from './short-url-data-builder';
+import { ShortUrlDataBuilder } from '@app/short-url/__mocks__/data-builder';
 
 export class ShortUrlObjectMother {
   static validUrlShortener() {

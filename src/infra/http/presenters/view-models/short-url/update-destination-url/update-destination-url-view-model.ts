@@ -1,7 +1,7 @@
 import { UnprocessableEntityException } from '@nestjs/common';
-import { BaseViewModel } from '../../base.view-model';
 import { ConfigService } from '@nestjs/config';
-import { ShortUrl } from '@app/short-url/domain/short-url';
+import { ShortUrl } from '@app/short-url/domain';
+import { BaseViewModel } from '../../base.view-model';
 
 type UpdateDestinationShortUrlVMResponse = {
   shortUrl: string;

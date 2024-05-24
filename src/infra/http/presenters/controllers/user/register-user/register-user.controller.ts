@@ -8,9 +8,9 @@ import {
   ApiUnprocessableEntityResponse,
 } from '@nestjs/swagger';
 import { RegisterUserDto, RegisterUserResponseDto } from '../dtos';
-import { RegisterUserUseCase } from '@app/user/use-cases/register';
-import { RegisterUserViewModel } from '@infra/http/presenters/view-models/user';
 import { ApiPath, ApiTag } from '../constants';
+import { RegisterUserUseCase } from '@app/user/use-cases';
+import { RegisterUserViewModel } from '@infra/http/presenters/view-models/user';
 
 @ApiTags(ApiTag)
 @Controller(ApiPath)

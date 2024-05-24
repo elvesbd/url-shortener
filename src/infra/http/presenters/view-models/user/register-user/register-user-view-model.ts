@@ -1,5 +1,5 @@
 import { UnprocessableEntityException } from '@nestjs/common';
-import { User } from '@app/user/domain/user';
+import { User } from '@app/user/domain';
 import { BaseViewModel } from '../../base.view-model';
 
 type RegisterUserVMResponse = {

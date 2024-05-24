@@ -18,7 +18,7 @@ import { ApiPath, ApiTag } from '../constants';
 import { CurrentUserDto } from '@infra/http/auth/decorators/dto';
 import { JwtAuthGuard } from '@infra/http/auth/strategies/jwt/jwt-auth.guard';
 import { CurrentUser } from '@infra/http/auth/decorators/current-user.decorator';
-import { UpdateDestinationUrlUseCase } from '@app/short-url/use-cases/update-destination-url';
+import { UpdateDestinationUrlUseCase } from '@app/short-url/use-cases';
 import { UpdateDestinationShortUrlViewModel } from '@infra/http/presenters/view-models/short-url';
 
 @ApiTags(ApiTag)

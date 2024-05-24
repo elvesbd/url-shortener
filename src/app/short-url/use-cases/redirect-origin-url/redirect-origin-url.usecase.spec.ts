@@ -1,10 +1,10 @@
-import { ShortUrlRepository } from '@app/short-url/ports/repository/short-url.repository';
-import { RedirectToOriginalUrlUseCase } from './redirect-origin-url.usecase';
 import { Test, TestingModule } from '@nestjs/testing';
-import { ShortUrlObjectMother } from '@app/short-url/__mocks__/data-builder/short-url-object.mother';
+import { ShortUrl } from '@app/short-url/domain';
 import { NotFoundException } from '@nestjs/common';
-import { ShortUrlDeletedException } from '@app/short-url/exceptions/short-url-deleted.exception';
-import { ShortUrl } from '@app/short-url/domain/short-url';
+import { ShortUrlRepository } from '@app/short-url/ports';
+import { RedirectToOriginalUrlUseCase } from '@app/short-url/use-cases';
+import { ShortUrlDeletedException } from '@app/short-url/exceptions';
+import { ShortUrlObjectMother } from '@app/short-url/__mocks__/data-builder';
 
 describe('RedirectToOriginalUrlUseCase', () => {
   let sut: RedirectToOriginalUrlUseCase;

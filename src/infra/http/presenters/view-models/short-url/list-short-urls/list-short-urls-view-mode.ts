@@ -1,6 +1,6 @@
-import { ShortUrl } from '@app/short-url/domain/short-url';
-import { BaseViewModel } from '../../base.view-model';
 import { ConfigService } from '@nestjs/config';
+import { ShortUrl } from '@app/short-url/domain';
+import { BaseViewModel } from '../../base.view-model';
 
 type ListShortUrlsVMResponse = {
   shortUrl: string;

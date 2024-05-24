@@ -1,9 +1,8 @@
 import { Injectable } from '@nestjs/common';
+import { ShortUrl } from '@app/short-url/domain';
 import { UseCase } from '@app/shared/interfaces/UseCase';
-import { ShortUrl } from '@app/short-url/domain/short-url';
-import { GenerateShortUrlInput } from './types/generate-short-url.input';
-import { GenerateShortUrlOutput } from './types/generate-short-url.output';
-import { ShortUrlRepository } from '@app/short-url/ports/repository/short-url.repository';
+import { ShortUrlRepository } from '@app/short-url/ports';
+import { GenerateShortUrlInput, GenerateShortUrlOutput } from './types';
 
 @Injectable()
 export class GenerateShortUrlUseCase

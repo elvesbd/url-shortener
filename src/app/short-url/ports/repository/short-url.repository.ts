@@ -1,4 +1,4 @@
-import { ShortUrl } from '@app/short-url/domain/short-url';
+import { ShortUrl } from '@app/short-url/domain';
 
 export abstract class ShortUrlRepository {
   public abstract remove(url: ShortUrl): Promise<void>;

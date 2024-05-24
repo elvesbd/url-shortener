@@ -1,4 +1,4 @@
-import { Notification } from '@app/shared/notification/notification';
+import { Notification } from '@app/shared/notification';
 import { Password } from '@app/shared/value-objects/password';
 
 describe('Password Value Object', () => {

@@ -1,9 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ShortUrlRepository } from '@app/short-url/ports/repository/short-url.repository';
-import { ShortUrlObjectMother } from '@app/short-url/__mocks__/data-builder/short-url-object.mother';
-import { ListShortUrlsUseCase } from './list-short-urls.usecase';
-import { ListShortUrlsInput } from './types/list-short-urls.input';
-import { ShortUrl } from '@app/short-url/domain/short-url';
+import { ListShortUrlsInput } from './types';
+import { ShortUrl } from '@app/short-url/domain';
+import { ShortUrlRepository } from '@app/short-url/ports';
+import { ListShortUrlsUseCase } from '@app/short-url/use-cases';
+import { ShortUrlObjectMother } from '@app/short-url/__mocks__/data-builder';
 
 describe('ListShortUrlsUseCase', () => {
   let sut: ListShortUrlsUseCase;

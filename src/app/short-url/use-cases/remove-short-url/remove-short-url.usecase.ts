@@ -3,11 +3,11 @@ import {
   NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
+import { RemoveShortUrlInput } from './types';
+import { ShortUrl } from '@app/short-url/domain';
 import { UseCase } from '@app/shared/interfaces/UseCase';
-import { RemoveShortUrlInput } from './types/remove-short-url.input';
-import { ShortUrlRepository } from '@app/short-url/ports/repository/short-url.repository';
-import { ShortUrl } from '@app/short-url/domain/short-url';
-import { ShortUrlDeletedException } from '@app/short-url/exceptions/short-url-deleted.exception';
+import { ShortUrlRepository } from '@app/short-url/ports';
+import { ShortUrlDeletedException } from '@app/short-url/exceptions';
 
 @Injectable()
 export class RemoveShortUrlUseCase
