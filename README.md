@@ -25,19 +25,6 @@ O objetivo deste sistema é fornecer um serviço de encurtamento de URLs. Os usu
 - Docker
 - Docker-compose
 
-## Variáveis de Ambiente
-
-As seguintes variáveis de ambiente devem ser configuradas:
-
-- `PORT`: 3000
-- `JWT_SECRET`: NOkP94rH23q6H7a06yI/jdqv0PEELBHOVwS3Z8bnoRw=
-- `POSTGRES_HOST`: localhost
-- `POSTGRES_PORT`: 5432
-- `POSTGRES_DB`: short-urls
-- `POSTGRES_USER`: postgres
-- `POSTGRES_PASSWORD`: postgres
-- `BASE_URL`: http://localhost:3000/url/
-
 ## Endpoints
 
 ### Autenticação
