@@ -20,6 +20,7 @@ import { RemoveShortUrlController } from './presenters/controllers/short-url/rem
 import { GenerateShortUrlController } from './presenters/controllers/short-url/generate-short-url/generate-short-url.controller';
 import { UpdateDestinationUrlController } from './presenters/controllers/short-url/update-destination-url/update-destination-url.controller';
 import { RedirectToOriginalUrlController } from './presenters/controllers/short-url/redirect-to-origin-url/redirect-to-origin-url.controller';
+import { AppHealthController } from './presenters/controllers/health-check/health-check.controller';
 
 @Module({
   imports: [DatabaseModule, AuthModule],
@@ -83,6 +84,7 @@ import { RedirectToOriginalUrlController } from './presenters/controllers/short-
     },
   ],
   controllers: [
+    AppHealthController,
     RegisterUserController,
     AuthenticateUserController,
     ListShortUrlController,
