@@ -16,9 +16,13 @@ services:
     container_name: url-shortener-app
     ports:
       - '3000:3000'
-    env_file: .env
     environment:
+      JWT_SECRET: NOkP94rH23q6H7a06yI/jdqv0PEELBHOVwS3Z8bnoRw=
       POSTGRES_HOST: db
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: short-urls
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
     command: bash -c "npm run migration:run && npm start"
     depends_on:
       - db
