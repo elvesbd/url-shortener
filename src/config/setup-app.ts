@@ -10,7 +10,7 @@ export const setupApp = (app: INestApplication): INestApplication => {
 
   app.enableCors({
     origin: '*',
-    methods: ['GET', 'POST', 'DELETE'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: [
       'Acess',
       'Content-Type',

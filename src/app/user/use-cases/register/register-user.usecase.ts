@@ -1,14 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { User } from '@app/user/domain/user';
 import { UseCase } from '@app/shared/interfaces/UseCase';
-import { UserFoundException } from '@app/user/exceptions/user-found.exception';
 import { RegisterUserInput } from './types/register-user.input';
+import { UserFoundException } from '@app/user/exceptions/user-found.exception';
 import { UserRepository } from '@app/user/ports/repository/user.repository';
 import { HashPassword } from '@app/user/ports/cryptography/encrypt.password';
 
 type RegisterUserOutput = {
-  data: User;
-  notifications?: string[];
+  user: User;
 };
 
 @Injectable()
@@ -33,21 +32,14 @@ export class RegisterUserUseCase
       email,
       password,
     });
-
     if (user.hasNotifications) {
-      return {
-        data: null,
-        notifications: user.notifications,
-      };
+      return { user };
     }
 
     const hash = await this.cryptography.hash(password);
     user.setPasswordWithHash(hash);
 
     await this.userRepository.register(user);
-    return {
-      data: user,
-      notifications: [],
-    };
+    return { user };
   }
 }

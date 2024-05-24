@@ -1,9 +1,10 @@
-import { Notification } from '@app/shared/notification/notification';
+import Id from '@app/shared/value-objects/id';
 import { UserProps } from './types/user.props';
 import { Entity } from '@app/shared/entity/entity';
 import { Name } from '@app/shared/value-objects/name';
 import { Email } from '@app/shared/value-objects/email';
 import { Password } from '@app/shared/value-objects/password';
+import { Notification } from '@app/shared/notification/notification';
 
 export class User extends Entity<UserProps> {
   private _name: Name;
@@ -27,12 +28,8 @@ export class User extends Entity<UserProps> {
     return user;
   }
 
-  get hasNotifications(): boolean {
-    return this._notification.hasNotifications();
-  }
-
-  get notifications(): string[] {
-    return this._notification.getNotifications();
+  get id(): Id {
+    return this._id;
   }
 
   get name(): Name {
@@ -45,6 +42,14 @@ export class User extends Entity<UserProps> {
 
   get password(): Password {
     return this._password;
+  }
+
+  get hasNotifications(): boolean {
+    return this._notification.hasNotifications();
+  }
+
+  get notifications(): string[] {
+    return this._notification.getNotifications();
   }
 
   public setPasswordWithHash(hash: string) {

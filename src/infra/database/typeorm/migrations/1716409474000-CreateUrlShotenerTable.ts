@@ -4,7 +4,7 @@ export class CreateUrlShotenerTable1716409474000 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'url_shorteners',
+        name: 'short_urls',
         columns: [
           {
             name: 'id',
@@ -26,7 +26,7 @@ export class CreateUrlShotenerTable1716409474000 implements MigrationInterface {
             isNullable: false,
           },
           {
-            name: 'accessCount',
+            name: 'clicks',
             type: 'int',
             default: 0,
           },

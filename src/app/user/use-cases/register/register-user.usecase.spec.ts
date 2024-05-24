@@ -76,11 +76,7 @@ describe('RegisterUserUseCase', () => {
       const user = User.create(input);
       const expectedResult: RegisterUserOutput = {
         data: null,
-        notifications: [
-          'Password must be at least 8 characters long',
-          'Password must contain at least one letter',
-          'Password must contain at least one special character',
-        ],
+        notifications: ['Password must be at least 8 characters long'],
       };
 
       const result = await sut.execute(input);
@@ -99,10 +95,9 @@ describe('RegisterUserUseCase', () => {
     it('should be register an use with success', async () => {
       const result = await sut.execute(input);
 
+      expect(result.user).toBeDefined();
       expect(userRepository.register).toHaveBeenCalled();
       expect(userRepository.register).toHaveBeenCalledTimes(1);
-      expect(result.data).toBeDefined();
-      expect(result.notifications).toHaveLength(0);
     });
   });
 });

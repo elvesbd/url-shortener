@@ -13,13 +13,18 @@ export class Url {
   }
 
   private validate(notification: Notification): void {
+    if (typeof this._value !== 'string') {
+      notification.addNotification('URL should be a string');
+      return;
+    }
+
     if (!this._value) {
       notification.addNotification('URL should not be empty');
       return;
     }
 
     const urlRegex =
-      /^https:\/\/(www\.)?[a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$/;
+      /^(https?:\/\/)(www\.)?[a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$/;
 
     if (!urlRegex.test(this._value)) {
       notification.addNotification('Invalid URL format');

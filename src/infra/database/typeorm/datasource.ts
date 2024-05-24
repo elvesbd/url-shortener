@@ -15,6 +15,6 @@ export const dataSource = new DataSource({
   password: configService.getOrThrow('POSTGRES_PASSWORD'),
   entities: [path.join(__dirname, '..', 'typeorm/entities', '*.{ts,js}')],
   migrations: [path.join(__dirname, '..', 'typeorm/migrations', '*.{ts,js}')],
-  synchronize: true,
+  synchronize: false,
   logging: false,
 });

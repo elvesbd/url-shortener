@@ -64,7 +64,7 @@ describe('AuthenticateUserUseCase', () => {
 
   describe('execute', () => {
     it('should call find by email with correct values', async () => {
-      await sut.execute(email, password);
+      await sut.execute({ email, password });
 
       expect(userRepository.findByEmail).toHaveBeenCalledTimes(1);
       expect(userRepository.findByEmail).toHaveBeenCalledWith(email);
@@ -73,7 +73,7 @@ describe('AuthenticateUserUseCase', () => {
     it('should throw UnauthorizedException if user not found', async () => {
       jest.spyOn(userRepository, 'findByEmail').mockResolvedValueOnce(null);
 
-      await expect(sut.execute(email, password)).rejects.toThrow(
+      await expect(sut.execute({ email, password })).rejects.toThrow(
         UnauthorizedException,
       );
     });
@@ -81,13 +81,13 @@ describe('AuthenticateUserUseCase', () => {
     it('should throw UnauthorizedException if password is not valid', async () => {
       jest.spyOn(cryptography, 'compare').mockResolvedValueOnce(false);
 
-      await expect(sut.execute(email, password)).rejects.toThrow(
+      await expect(sut.execute({ email, password })).rejects.toThrow(
         UnauthorizedException,
       );
     });
 
     it('should call compare password with correct values', async () => {
-      await sut.execute(email, password);
+      await sut.execute({ email, password });
 
       expect(cryptography.compare).toHaveBeenCalledTimes(1);
       expect(cryptography.compare).toHaveBeenCalledWith(
@@ -97,14 +97,14 @@ describe('AuthenticateUserUseCase', () => {
     });
 
     it('should call sign token with correct values', async () => {
-      await sut.execute(email, password);
+      await sut.execute({ email, password });
 
       expect(token.signAsync).toHaveBeenCalledTimes(1);
       expect(token.signAsync).toHaveBeenCalledWith({ sub: user.id.value });
     });
 
     it('should be register an use with success', async () => {
-      const result = await sut.execute(email, password);
+      const result = await sut.execute({ email, password });
 
       expect(result).toStrictEqual({
         accessToken: 'accessToken',
