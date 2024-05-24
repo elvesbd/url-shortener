@@ -25,6 +25,14 @@ export class ShortUrlObjectMother {
       .build();
   }
 
+  static withDifferentUserId() {
+    const userId = 'a83049aa-ed36-40a3-950c-84d2e4e4b1a2';
+    return ShortUrlDataBuilder.aShortUrl()
+      .withUserId(userId)
+      .withDeletedAt(null)
+      .build();
+  }
+
   static withDeletedAt() {
     const deletionDate = new Date(2024, 4, 22);
     return ShortUrlDataBuilder.aShortUrl().withDeletedAt(deletionDate).build();

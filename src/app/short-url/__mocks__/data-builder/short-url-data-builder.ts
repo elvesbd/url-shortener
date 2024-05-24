@@ -26,6 +26,11 @@ export class ShortUrlDataBuilder {
     return this;
   }
 
+  public withUserId(userId: string): this {
+    this.props.userId = userId;
+    return this;
+  }
+
   public withDeletedAt(date: Date): this {
     this.props.deletedAt = date;
     return this;
