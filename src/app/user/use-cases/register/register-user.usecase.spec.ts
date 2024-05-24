@@ -74,15 +74,13 @@ describe('RegisterUserUseCase', () => {
     it('should generate notifications for invalid user ID length', async () => {
       const input = UserObjectMother.withInvalidIdLength();
       const user = User.create(input);
-      const expectedResult: RegisterUserOutput = {
-        data: null,
-        notifications: ['Password must be at least 8 characters long'],
-      };
 
       const result = await sut.execute(input);
 
       expect(user.hasNotifications).toBeTruthy();
-      expect(result).toStrictEqual(expectedResult);
+      expect(result.user.notifications).toStrictEqual([
+        'Password must be at least 8 characters long',
+      ]);
     });
 
     it('should call hash password with correct values', async () => {

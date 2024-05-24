@@ -1,17 +1,18 @@
-import { UnauthorizedException } from '@nestjs/common';
+import { NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { ShortUrl } from '@app/short-url/domain/short-url';
 import { UpdateDestinationUrlUseCase } from './update-destination-url.usecase';
 import { UpdateDestinationUrlInput } from './types/update-destination-url.input';
 import { ShortUrlRepository } from '@app/short-url/ports/repository/short-url.repository';
 import { ShortUrlObjectMother } from '@app/short-url/__mocks__/data-builder/short-url-object.mother';
+import { ShortUrlDeletedException } from '@app/short-url/exceptions/short-url-deleted.exception';
 
 describe('UpdateDestinationUrlUseCase', () => {
   let sut: UpdateDestinationUrlUseCase;
   let shortUrlRepository: ShortUrlRepository;
 
   const urlShortenerProps = ShortUrlObjectMother.validUrlShortener();
-  const urlShortener = ShortUrl.create(urlShortenerProps);
+  const shortUrl = ShortUrl.create(urlShortenerProps);
 
   beforeEach(async () => {
     jest.clearAllMocks();
@@ -19,7 +20,7 @@ describe('UpdateDestinationUrlUseCase', () => {
     const ShortUrlRepositoryProvider = {
       provide: ShortUrlRepository,
       useValue: {
-        findById: jest.fn().mockResolvedValue(urlShortener),
+        findByShortUrl: jest.fn().mockResolvedValue(shortUrl),
         updateDestinationUrl: jest.fn().mockResolvedValue(0),
       },
     };
@@ -38,28 +39,30 @@ describe('UpdateDestinationUrlUseCase', () => {
   });
 
   describe('execute', () => {
-    it('should throw UnauthorizedException if URL not found', async () => {
+    it('should throw NotFoundException if URL not found', async () => {
       const input: UpdateDestinationUrlInput = {
-        shortUrl: urlShortener.id.value,
-        userId: urlShortener.userId,
+        shortUrl: shortUrl.id.value,
+        userId: shortUrl.userId,
         newOriginUrl: '',
       };
 
-      jest.spyOn(shortUrlRepository, 'findById').mockResolvedValueOnce(null);
+      jest
+        .spyOn(shortUrlRepository, 'findByShortUrl')
+        .mockResolvedValueOnce(null);
 
-      await expect(sut.execute(input)).rejects.toThrow(UnauthorizedException);
+      await expect(sut.execute(input)).rejects.toThrow(NotFoundException);
     });
 
     it('should throw UnauthorizedException if userId does not match', async () => {
       const urlShortenerProps = ShortUrlObjectMother.withOutUserId();
-      const urlShortener = ShortUrl.create(urlShortenerProps);
+      const shortUrl = ShortUrl.create(urlShortenerProps);
 
       jest
-        .spyOn(shortUrlRepository, 'findById')
-        .mockResolvedValueOnce(urlShortener);
+        .spyOn(shortUrlRepository, 'findByShortUrl')
+        .mockResolvedValueOnce(shortUrl);
 
       const input: UpdateDestinationUrlInput = {
-        shortUrl: urlShortener.id.value,
+        shortUrl: shortUrl.id.value,
         userId: 'd93049aa-ed36-40a3-950c-84d2e4e4b1a3',
         newOriginUrl: 'https://new-url.com',
       };
@@ -67,12 +70,12 @@ describe('UpdateDestinationUrlUseCase', () => {
       await expect(sut.execute(input)).rejects.toThrow(UnauthorizedException);
     });
 
-    it('should throw UnauthorizedException if URL is marked as deleted', async () => {
+    it('should throw ShortUrlDeletedException if URL is marked as deleted', async () => {
       const deletedUrlShortener = ShortUrlObjectMother.withDeletedAt();
-      const urlShortener = ShortUrl.create(deletedUrlShortener);
+      const shortUrl = ShortUrl.create(deletedUrlShortener);
       jest
-        .spyOn(shortUrlRepository, 'findById')
-        .mockResolvedValueOnce(urlShortener);
+        .spyOn(shortUrlRepository, 'findByShortUrl')
+        .mockResolvedValueOnce(shortUrl);
 
       const input: UpdateDestinationUrlInput = {
         shortUrl: '',
@@ -80,13 +83,15 @@ describe('UpdateDestinationUrlUseCase', () => {
         newOriginUrl: '',
       };
 
-      await expect(sut.execute(input)).rejects.toThrow(UnauthorizedException);
+      await expect(sut.execute(input)).rejects.toThrow(
+        ShortUrlDeletedException,
+      );
     });
 
     it('should call update destination url with correct values', async () => {
       const input: UpdateDestinationUrlInput = {
-        shortUrl: urlShortener.id.value,
-        userId: urlShortener.userId,
+        shortUrl: shortUrl.id.value,
+        userId: shortUrl.userId,
         newOriginUrl: 'https://new-url.com',
       };
 

@@ -9,24 +9,25 @@ export class RedirectToOriginalUrlUseCase implements UseCase<string, string> {
   constructor(private readonly shortUrlRepository: ShortUrlRepository) {}
 
   async execute(shortUrl: string): Promise<string> {
-    const urlShortener = await this.shortUrlRepository.findByShortUrl(shortUrl);
+    const foundedShortUrl =
+      await this.shortUrlRepository.findByShortUrl(shortUrl);
 
-    this.validateDeletedUrl(urlShortener);
+    this.validateDeletedUrl(foundedShortUrl);
 
-    urlShortener.incrementAccessCount();
-    await this.shortUrlRepository.updateAccessCount(urlShortener);
+    foundedShortUrl.incrementAccessCount();
+    await this.shortUrlRepository.updateAccessCount(foundedShortUrl);
 
-    return urlShortener.originalUrl;
+    return foundedShortUrl.originalUrl;
   }
 
-  private validateDeletedUrl(urlShortener: ShortUrl | null): void {
-    if (!urlShortener) {
+  private validateDeletedUrl(foundedShortUrl: ShortUrl | null): void {
+    if (!foundedShortUrl) {
       throw new NotFoundException('URL not found.');
     }
 
-    if (urlShortener.deletedAt) {
+    if (foundedShortUrl.deletedAt) {
       throw new ShortUrlDeletedException(
-        `The URL ${urlShortener.shortUrl} has been deleted and cannot be accessed for redirection.`,
+        `The URL ${foundedShortUrl.shortUrl} has been deleted and cannot be accessed for redirection.`,
       );
     }
   }

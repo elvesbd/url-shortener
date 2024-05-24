@@ -42,30 +42,27 @@ describe('GenerateShortUrlUseCase', () => {
     it('should return notifications when URL is invalid', async () => {
       const output = await sut.execute(invalidUrlOriginalUrlInput);
 
-      expect(output.urlShortener).not.toBeDefined();
+      expect(output.shortUrl).toBeDefined();
+      expect(output.shortUrl.notifications).toHaveLength(1);
       expect(shortUrlRepository.generate).not.toHaveBeenCalled();
     });
 
     it('should generate a short URL when input is valid and user id is provided', async () => {
       const output = await sut.execute(validOriginalUrlWithUserIdInput);
 
-      expect(output.urlShortener).toBeDefined();
-      expect(output.urlShortener.userId).toBeDefined();
-      expect(output.urlShortener.shortUrl).toMatch(
-        /^http:\/\/localhost\/[A-Za-z0-9]{6}$/,
-      );
-      expect(output.urlShortener.notifications).toEqual([]);
+      expect(output.shortUrl).toBeDefined();
+      expect(output.shortUrl.userId).toBeDefined();
+      expect(output.shortUrl.shortUrl).toHaveLength(6);
+      expect(output.shortUrl.notifications).toEqual([]);
     });
 
     it('should generate a short URL when input is valid and user id is not provided', async () => {
       const output = await sut.execute(validOriginalUrlWithOutUserIdInput);
 
-      expect(output.urlShortener).toBeDefined();
-      expect(output.urlShortener.userId).toBeDefined();
-      expect(output.urlShortener.shortUrl).toMatch(
-        /^http:\/\/localhost\/[A-Za-z0-9]{6}$/,
-      );
-      expect(output.urlShortener.notifications).toEqual([]);
+      expect(output.shortUrl).toBeDefined();
+      expect(output.shortUrl.userId).toBeDefined();
+      expect(output.shortUrl.shortUrl).toHaveLength(6);
+      expect(output.shortUrl.notifications).toEqual([]);
     });
 
     it('should call generate method of repository when URL is valid', async () => {

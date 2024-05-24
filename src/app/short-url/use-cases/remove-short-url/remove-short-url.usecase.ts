@@ -17,26 +17,27 @@ export class RemoveShortUrlUseCase
 
   async execute(input: RemoveShortUrlInput): Promise<void> {
     const { shortUrl, userId } = input;
-    const urlShortener = await this.shortUrlRepository.findByShortUrl(shortUrl);
+    const foundedShortUrl =
+      await this.shortUrlRepository.findByShortUrl(shortUrl);
 
-    this.validateUrl(urlShortener, userId);
+    this.validateUrl(foundedShortUrl, userId);
 
-    urlShortener.markAsDeleted();
-    await this.shortUrlRepository.remove(urlShortener);
+    foundedShortUrl.markAsDeleted();
+    await this.shortUrlRepository.remove(foundedShortUrl);
   }
 
-  private validateUrl(urlShortener: ShortUrl | null, userId: string): void {
-    if (!urlShortener) {
+  private validateUrl(foundedShortUrl: ShortUrl | null, userId: string): void {
+    if (!foundedShortUrl) {
       throw new NotFoundException('Shortened URL not found.');
     }
 
-    if (urlShortener.deletedAt) {
+    if (foundedShortUrl.deletedAt) {
       throw new ShortUrlDeletedException(
-        `The shortened URL ${urlShortener.shortUrl} has already been removed and cannot be removed again.`,
+        `The shortened URL ${foundedShortUrl.shortUrl} has already been removed and cannot be removed again.`,
       );
     }
 
-    if (urlShortener.userId !== userId) {
+    if (foundedShortUrl.userId !== userId) {
       throw new UnauthorizedException(
         'You are not authorized to edit this shortened URL.',
       );

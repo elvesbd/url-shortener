@@ -8,53 +8,51 @@ describe('ShortUrl', () => {
   const validUrlShortenerProps = ShortUrlObjectMother.validUrlShortener();
 
   it('should create a UrlShortener instance', () => {
-    const urlShortener = ShortUrl.create(validUrlShortenerProps);
+    const shortUrl = ShortUrl.create(validUrlShortenerProps);
 
-    expect(urlShortener).toBeInstanceOf(ShortUrl);
+    expect(shortUrl).toBeInstanceOf(ShortUrl);
   });
 
   it('should generate a short URL', () => {
-    const urlShortener = ShortUrl.create(shortUrlProps);
+    const shortUrl = ShortUrl.create(shortUrlProps);
 
-    expect(urlShortener.shortUrl).toMatch(
-      /^http:\/\/localhost\/[A-Za-z0-9]{6}$/,
-    );
+    expect(shortUrl.shortUrl).toMatch(/^http:\/\/localhost\/[A-Za-z0-9]{6}$/);
   });
 
   it('should update the original URL', () => {
-    const urlShortener = ShortUrl.create(validUrlShortenerProps);
+    const shortUrl = ShortUrl.create(validUrlShortenerProps);
     const newUrl = 'https://new-url.com';
-    urlShortener.updateDestination(newUrl);
+    shortUrl.updateDestination(newUrl);
 
-    expect(urlShortener.originalUrl).toBe(newUrl);
+    expect(shortUrl.originalUrl).toBe(newUrl);
   });
 
   it('should increment access count', () => {
-    const urlShortener = ShortUrl.create(validUrlShortenerProps);
-    const initialCount = urlShortener.accessCount;
+    const shortUrl = ShortUrl.create(validUrlShortenerProps);
+    const initialCount = shortUrl.clicks;
 
-    urlShortener.incrementAccessCount();
+    shortUrl.incrementAccessCount();
 
-    expect(urlShortener.accessCount).toBe(initialCount + 1);
+    expect(shortUrl.clicks).toBe(initialCount + 1);
   });
 
   it('should mark the URL as deleted', () => {
-    const urlShortener = ShortUrl.create(validUrlShortenerProps);
-    urlShortener.markAsDeleted();
+    const shortUrl = ShortUrl.create(validUrlShortenerProps);
+    shortUrl.markAsDeleted();
 
-    expect(urlShortener.deletedAt).toBeInstanceOf(Date);
+    expect(shortUrl.deletedAt).toBeInstanceOf(Date);
   });
 
   it('should return true if there are notifications', () => {
-    const urlShortener = ShortUrl.create(invalidUrlProps);
+    const shortUrl = ShortUrl.create(invalidUrlProps);
 
-    expect(urlShortener.hasNotifications).toBeTruthy();
+    expect(shortUrl.hasNotifications).toBeTruthy();
   });
 
   it('should return list of notifications', () => {
-    const urlShortener = ShortUrl.create(invalidUrlProps);
+    const shortUrl = ShortUrl.create(invalidUrlProps);
 
-    expect(urlShortener.notifications).toHaveLength(1);
-    expect(urlShortener.notifications).toEqual(['Invalid URL format']);
+    expect(shortUrl.notifications).toHaveLength(1);
+    expect(shortUrl.notifications).toEqual(['Invalid URL format']);
   });
 });
