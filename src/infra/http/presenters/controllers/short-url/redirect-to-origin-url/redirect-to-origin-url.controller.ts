@@ -13,10 +13,10 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { RedirectToOriginalUrlUseCase } from '@app/short-url/use-cases/redirect-origin-url';
-import { ApiPath, ApiTag } from '../constants';
+import { ApiTag } from '../constants';
 
 @ApiTags(ApiTag)
-@Controller(ApiPath)
+@Controller()
 export class RedirectToOriginalUrlController {
   constructor(
     private readonly redirectToOriginalUrlUseCase: RedirectToOriginalUrlUseCase,

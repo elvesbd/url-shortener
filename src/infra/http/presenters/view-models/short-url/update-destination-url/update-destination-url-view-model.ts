@@ -21,7 +21,7 @@ export class UpdateDestinationShortUrlViewModel implements BaseViewModel {
 
     const baseUrl = configService.get<string>('BASE_URL');
     return {
-      shortUrl: `${baseUrl}${model.shortUrl}`,
+      shortUrl: `${baseUrl}/${model.shortUrl}`,
     };
   }
 }
