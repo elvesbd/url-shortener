@@ -22,6 +22,7 @@ O objetivo deste sistema é fornecer um serviço de encurtamento de URLs. Os usu
 
 - Node.js
 - PostgreSQL
+- Docker
 - Docker-compose
 
 ## Variáveis de Ambiente
@@ -49,7 +50,7 @@ As seguintes variáveis de ambiente devem ser configuradas:
 - `GET /urls/user`: Lista URLs encurtadas pelo usuário autenticado
 - `PUT /urls/:shortUrl`: Atualiza a URL de destino de uma URL encurtada
 - `DELETE /urls/:shortUrl`: Deleta uma URL encurtada
-- `GET /urls/:shortUrl`: Redireciona o usuário para a URL original e contabiliza o acesso
+- `GET /:shortUrl`: Redireciona o usuário para a URL original e contabiliza o acesso
 
 ### Usuários
 
@@ -58,19 +59,14 @@ As seguintes variáveis de ambiente devem ser configuradas:
 
 ## Como Rodar o Projeto
 
-### Rodando Localmente
+1. Clone o repositório.
+2. Certifique-se de ter todas as dependências instaladas:
 
-1. Clone o repositório
-2. Instale as dependências com `npm install`
-3. Configure as variáveis de ambiente (consulte o arquivo `.env.example` para as variáveis necessárias)
-4. Inicie o banco de dados PostgreSQL localmente ou use Docker Compose (consulte a próxima seção)
-5. Execute as migrações do banco de dados com `npm run typeorm:migration:run`
-6. Inicie o servidor com `npm run start:dev`
+   - [Node.js](https://nodejs.org/)
+   - [PostgreSQL](https://www.postgresql.org/)
+   - [Docker](https://docs.docker.com/)
+   - [Docker Compose](https://docs.docker.com/compose/)
 
-### Usando Docker Compose
-
-1. Clone o repositório
-2. Certifique-se de ter o Docker e o Docker Compose instalados em seu sistema
 3. Execute `docker-compose up -d` para iniciar o banco de dados PostgreSQL e a aplicação
 4. Acesse a aplicação em `http://localhost:3000`
 
