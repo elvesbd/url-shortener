@@ -17,7 +17,7 @@ import { JwtKeyService } from './decorators/current-user.decorator';
       useFactory: (configService: ConfigService) => ({
         secret: configService.getOrThrow('JWT_SECRET'),
         signOptions: {
-          expiresIn: '60s', //30m
+          expiresIn: '3600s', //30m
         },
       }),
     }),

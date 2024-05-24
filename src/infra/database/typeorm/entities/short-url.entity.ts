@@ -8,7 +8,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity('short_urls')
+@Entity('short-urls')
 @Index('IDX_SHORT_URL', ['shortUrl'], { unique: true })
 export class TypeORMShortUrlEntity {
   @PrimaryGeneratedColumn('uuid')

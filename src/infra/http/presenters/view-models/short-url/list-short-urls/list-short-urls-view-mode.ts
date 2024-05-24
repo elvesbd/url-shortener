@@ -4,7 +4,7 @@ import { ConfigService } from '@nestjs/config';
 
 type ListShortUrlsVMResponse = {
   shortUrl: string;
-  accessCount: number;
+  clicks: number;
   updatedAt: Date;
 };
 
@@ -17,7 +17,7 @@ export class ListShortUrlsViewModel implements BaseViewModel {
 
     return models.map((model) => ({
       shortUrl: `${baseUrl}${model.shortUrl}`,
-      accessCount: model.clicks,
+      clicks: model.clicks,
       updatedAt: model.updatedAt,
     }));
   }

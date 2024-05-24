@@ -5,5 +5,11 @@ export class ListShortUrlsResponseDto {
   shortUrl: string;
 
   @ApiProperty({ description: 'Número de acessos', example: 0 })
-  accessCount: number;
+  clicks: number;
+
+  @ApiProperty({
+    description: 'Data de atualização',
+    example: '2023-05-24T10:30:00Z',
+  })
+  updatedAt: Date;
 }

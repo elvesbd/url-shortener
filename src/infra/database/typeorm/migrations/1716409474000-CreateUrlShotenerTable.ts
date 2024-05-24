@@ -4,7 +4,7 @@ export class CreateUrlShotenerTable1716409474000 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'short_urls',
+        name: 'short-urls',
         columns: [
           {
             name: 'id',
@@ -58,7 +58,7 @@ export class CreateUrlShotenerTable1716409474000 implements MigrationInterface {
     );
 
     await queryRunner.createIndex(
-      'url_shorteners',
+      'short-urls',
       new TableIndex({
         name: 'IDX_SHORT_URL',
         columnNames: ['shortUrl'],
@@ -68,7 +68,7 @@ export class CreateUrlShotenerTable1716409474000 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropIndex('url_shorteners', 'IDX_SHORT_URL');
-    await queryRunner.dropTable('url_shorteners');
+    await queryRunner.dropIndex('short-urls', 'IDX_SHORT_URL');
+    await queryRunner.dropTable('short-urls');
   }
 }

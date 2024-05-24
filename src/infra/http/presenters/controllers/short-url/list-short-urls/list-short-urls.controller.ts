@@ -26,7 +26,6 @@ export class ListShortUrlController {
   ) {}
 
   @ApiOperation({ description: 'List all shortened URLs for a user.' })
-  @ApiQuery({ name: 'userId', required: true, description: 'ID do usuário' })
   @ApiOkResponse({
     description: 'List of shortened URLs retrieved successfully.',
     type: ListShortUrlsResponseDto,

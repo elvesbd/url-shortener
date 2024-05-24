@@ -10,6 +10,7 @@ import {
   ApiNoContentResponse,
   ApiNotFoundResponse,
   ApiOperation,
+  ApiParam,
   ApiQuery,
   ApiTags,
 } from '@nestjs/swagger';
@@ -22,15 +23,13 @@ export class RedirectToOriginalUrlController {
     private readonly redirectToOriginalUrlUseCase: RedirectToOriginalUrlUseCase,
   ) {}
 
-  @ApiOperation({ description: 'Register access to a shortened URL.' })
-  @ApiQuery({
+  @ApiOperation({
+    description: 'Redirect to the original URL using a shortened URL.',
+  })
+  @ApiParam({
     name: 'shortUrl',
     required: true,
     description: 'Shortened URL to register access to.',
-  })
-  @ApiNoContentResponse({
-    description:
-      'Access to the shortened URL has been registered successfully.',
   })
   @ApiNotFoundResponse({ description: 'Shortened URL not found.' })
   @HttpCode(HttpStatus.NO_CONTENT)
@@ -39,6 +38,8 @@ export class RedirectToOriginalUrlController {
   public async redirectToOriginalUrl(
     @Param('shortUrl') shortUrl: string,
   ): Promise<{ url: string }> {
+    console.log('nwJvha', shortUrl);
+
     const originalUrl =
       await this.redirectToOriginalUrlUseCase.execute(shortUrl);
 

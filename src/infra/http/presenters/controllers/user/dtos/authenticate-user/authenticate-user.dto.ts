@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import {
   IsEmail,
   IsNotEmpty,
@@ -12,6 +13,7 @@ export class AuthenticateUserDto {
   @IsString()
   @IsNotEmpty()
   @MaxLength(255)
+  @ApiProperty()
   email: string;
 
   @IsString()
@@ -21,5 +23,6 @@ export class AuthenticateUserDto {
   @Matches(/[!@#$%^&*(),.?":{}|<>]/, {
     message: 'Password must contain at least one special character',
   })
+  @ApiProperty()
   password: string;
 }

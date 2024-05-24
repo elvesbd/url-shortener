@@ -1,6 +1,7 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import {
+  ApiBearerAuth,
   ApiBody,
   ApiCreatedResponse,
   ApiOperation,
@@ -16,6 +17,7 @@ import {
 import { CurrentUserDto } from '@infra/http/auth/decorators/dto';
 import { GenerateUrlShortViewModel } from '@infra/http/presenters/view-models/short-url';
 
+@ApiBearerAuth()
 @ApiTags('url')
 @Controller('url')
 export class GenerateShortUrlController {
