@@ -17,5 +17,5 @@ export const setupDocs = (app: INestApplication): void => {
 
   const openAPIObj: OpenAPIObject = SwaggerModule.createDocument(app, config);
 
-  SwaggerModule.setup('api', app, openAPIObj);
+  SwaggerModule.setup('api-docs', app, openAPIObj);
 };
