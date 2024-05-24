@@ -10,9 +10,10 @@ import {
 import { RegisterUserDto, RegisterUserResponseDto } from '../dtos';
 import { RegisterUserUseCase } from '@app/user/use-cases/register';
 import { RegisterUserViewModel } from '@infra/http/presenters/view-models/user';
+import { ApiPath, ApiTag } from '../constants';
 
-@ApiTags('users')
-@Controller('users')
+@ApiTags(ApiTag)
+@Controller(ApiPath)
 export class RegisterUserController {
   constructor(private readonly registerUserUseCase: RegisterUserUseCase) {}
 

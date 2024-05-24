@@ -8,9 +8,11 @@ import {
 } from '@nestjs/swagger';
 import { AuthenticateUserDto, AuthenticateUserResponseDto } from '../dtos';
 import { AuthenticateUserUseCase } from '@app/user/use-cases/authenticate';
+import { ApiTag } from '../../short-url/constants';
+import { ApiPath } from '../constants';
 
-@ApiTags('users')
-@Controller('users')
+@ApiTags(ApiTag)
+@Controller(ApiPath)
 export class AuthenticateUserController {
   constructor(
     private readonly authenticateUserUseCase: AuthenticateUserUseCase,
