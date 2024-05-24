@@ -7,17 +7,16 @@ import {
   Redirect,
 } from '@nestjs/common';
 import {
-  ApiNoContentResponse,
   ApiNotFoundResponse,
   ApiOperation,
   ApiParam,
-  ApiQuery,
   ApiTags,
 } from '@nestjs/swagger';
 import { RedirectToOriginalUrlUseCase } from '@app/short-url/use-cases/redirect-origin-url';
+import { ApiPath, ApiTag } from '../constants';
 
-@ApiTags('url')
-@Controller('url')
+@ApiTags(ApiTag)
+@Controller(ApiPath)
 export class RedirectToOriginalUrlController {
   constructor(
     private readonly redirectToOriginalUrlUseCase: RedirectToOriginalUrlUseCase,

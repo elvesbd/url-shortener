@@ -16,10 +16,11 @@ import {
 } from '../dtos/generate-short-url';
 import { CurrentUserDto } from '@infra/http/auth/decorators/dto';
 import { GenerateUrlShortViewModel } from '@infra/http/presenters/view-models/short-url';
+import { ApiPath, ApiTag } from '../constants';
 
 @ApiBearerAuth()
-@ApiTags('url')
-@Controller('url')
+@ApiTags(ApiTag)
+@Controller(ApiPath)
 export class GenerateShortUrlController {
   constructor(
     private readonly configService: ConfigService,
@@ -41,7 +42,7 @@ export class GenerateShortUrlController {
   @ApiUnprocessableEntityResponse({
     description: 'Invalid input or validation errors.',
   })
-  @Post('generate')
+  @Post('shorten')
   public async generateShortUrl(
     @CurrentUser() user: CurrentUserDto,
     @Body() body: GenerateShortUrlDto,
